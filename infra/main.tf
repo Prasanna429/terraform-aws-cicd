@@ -1,5 +1,5 @@
 provider "aws" {
-  region = var.aws_region
+  region = us-east-1t
 }
 
 resource "aws_s3_bucket" "examples123" {
@@ -21,7 +21,7 @@ output "bucket_name" {
 
 terraform {
   backend "s3" {
-    bucket         = "your-terraform-state-bucket"
+    bucket         = "pss-terraform-state-bucket"
     key            = "terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "terraform-locks"
