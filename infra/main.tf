@@ -1,13 +1,9 @@
 provider "aws" {
-  region = var.aws_region
+  region = "us-east-1"
 }
 
-resource "aws_s3_bucket" "examples123" {
-  bucket = "my-terraform-cicd-bucket-${random_string.suffix.result}"
-}
-
-resource "aws_s3_bucket" "second_bucket" {
-  bucket = "my-second-terraform-bucket-${random_string.suffix.result}"
+resource "aws_s3_bucket" "example" {
+  bucket = "tf-cicd-${random_string.suffix.result}-us-east-1-864981717146"
 }
 
 resource "random_string" "suffix" {
@@ -16,12 +12,12 @@ resource "random_string" "suffix" {
 }
 
 output "bucket_name" {
-  value = aws_s3_bucket.examples123.bucket
+  value = aws_s3_bucket.example.bucket
 }
 
 terraform {
   backend "s3" {
-    bucket         = "your-terraform-state-bucket"
+    bucket         = "prasanna-terraform-state-864981717146"
     key            = "terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "terraform-locks"
