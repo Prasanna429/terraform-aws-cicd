@@ -11,10 +11,6 @@ resource "random_string" "suffix" {
   special = false
 }
 
-output "bucket_name" {
-  value = aws_s3_bucket.example.bucket
-}
-
 terraform {
   backend "s3" {
     bucket         = "prasanna-terraform-state-864981717146"
