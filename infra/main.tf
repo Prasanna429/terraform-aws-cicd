@@ -11,7 +11,6 @@ resource "random_string" "suffix" {
   special = false
 }
 
-#wehaveremovedbucketfromhere
 terraform {
   backend "s3" {
     bucket         = "prasanna-terraform-state-864981717146"
