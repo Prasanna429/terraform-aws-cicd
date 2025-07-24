@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "example" {
-  bucket = "tf-cicd-${random_string.suffix.result}-us-east-1-864981717146"
+  bucket = "tf-cicd-${random_string.suffix.result}"
 }
 
 resource "random_string" "suffix" {
