@@ -1,8 +1,14 @@
-name: Terraform Apply
+name: Terraform Apply or Destroy
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Terraform action to perform (apply or destroy)'
+        required: true
+        default: 'apply'
 permissions:
   contents: read
   id-token: write
@@ -27,7 +33,12 @@ jobs:
           terraform_version: 1.5.0
       - name: Terraform Init
         run: terraform init
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
+      - name: Terraform Action
+        run: |
+          if [ "${{ github.event.inputs.action }}" == "destroy" ]; then
+            terraform destroy -auto-approve
+          else
+            terraform apply -auto-approve
+          fi
         env:
           TF_LOG: DEBUG
